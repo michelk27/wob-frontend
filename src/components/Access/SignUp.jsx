@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import * as PropTypes from 'prop-types';
 import useAuthentication5 from "../Authentication5/useAuthentication5.jsx";
 
@@ -23,8 +23,6 @@ function LogIn(props) {
         </div>
     );
 }
-
-LogIn.propTypes = {children: PropTypes.node};
 
 function Top(props) {
     return (
@@ -129,16 +127,54 @@ Btm.propTypes = {children: PropTypes.node};
 
 function SignUp(props) {
     const { data } = useAuthentication5();
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+        confirmPassword: '',
+    });
 
     const handleChange = (e) => {
-        // Handle form input changes here
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission here
-    };
 
+        try {
+            // Validate passwords match
+            if (formData.password !== formData.confirmPassword) {
+                alert('Passwords do not match.');
+                return;
+            }
+
+            // Perform API call to backend (Java) to create the user
+            const response = await fetch('/api/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: formData.email,
+                    password: formData.password,
+                }),
+            });
+
+            if (response.ok) {
+                alert('User registered successfully.');
+                // Redirect to the sign-in screen or grid screen
+                // You can use React Router's history or other navigation methods here
+            } else {
+                const errorMessage = await response.text();
+                alert(`Failed to register user. ${errorMessage}`);
+            }
+        } catch (error) {
+            console.error('Error while signing up:', error);
+        }
+    };
     return (
         <ScreenDesktop className={props.className} data={data}>
             <LogIn>

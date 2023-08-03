@@ -11,6 +11,8 @@ const useAuthentication5 = () => {
     const [currentVariant, setCurrentVariant] = React.useState(
         variantOptions['ScreenDesktop']
     );
+    const [username, setUsername] = React.useState(''); // Add the username state
+    const [password, setPassword] = React.useState(''); // Add the password state
 
     const breakpointsVariant = useAuthentication5ResponsiveSize();
 
@@ -20,9 +22,9 @@ const useAuthentication5 = () => {
         }
     }, [breakpointsVariant]);
 
-    const data = { currentVariant };
+    const data = { currentVariant, username, password }; // Include username and password in the data object
 
-    const fns = { setCurrentVariant };
+    const fns = { setCurrentVariant, setUsername, setPassword }; // Add setters for username and password
 
     return { data, fns };
 };

@@ -76,12 +76,24 @@ function Input1(props) {
 Input1.propTypes = { children: PropTypes.node };
 
 function TextFieldStandard(props) {
+    const { data, fns } = useAuthentication5(); // Get the data and setters from the hook
+
+    const handleChange = (e) => {
+        const value = e.target.value;
+        if (props.label === 'User Name') {
+            fns.setUsername(value); // Set the username when the "UserName" field changes
+        } else if (props.label === 'Password') {
+            fns.setPassword(value); // Set the password when the "Password" field changes
+        }
+    };
+
     return (
         <input
             type={props.type || 'text'}
             disabled={props.disabled}
             placeholder={props.label}
             className="border border-gray-500 rounded p-2 mt-4 w-60"
+            onChange={handleChange} // Call the handleChange function when the input value changes
         />
     );
 }
@@ -106,12 +118,47 @@ function Btm(props) {
 Btm.propTypes = { children: PropTypes.node };
 
 function ButtonContained(props) {
+    const { data } = useAuthentication5(); // Get the data from the authentication hook
+    const [loading, setLoading] = React.useState(false);
+
+    const handleSignIn = () => {
+        setLoading(true);
+        // Call the backend API to sign in with the provided username and password
+        fetch('http://localhost:8080/api/signin', { // Make sure to specify the correct URL for the backend
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: data.username,
+                password: data.password,
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                data.authenticated = undefined;
+                setLoading(false);
+                if (data.authenticated) {
+                    // Sign in successful, you can navigate to the grid screen or show a success message
+                    console.log('Sign in successful');
+                } else {
+                    // Sign in failed, show an error message
+                    console.log('Wrong username or password');
+                }
+            })
+            .catch((error) => {
+                setLoading(false);
+                console.error('Error during sign in:', error);
+            });
+    };
+
     return (
         <button
-            disabled={props.disabled}
+            disabled={props.disabled || loading}
             className={`bg-${props.color} hover:bg-${props.color}-700 text-white font-bold py-2 px-4 rounded mt-4`}
+            onClick={handleSignIn} // Call the handleSignIn function when the button is clicked
         >
-            {props.children}
+            {loading ? 'Signing In...' : props.children}
         </button>
     );
 }
@@ -124,7 +171,6 @@ ButtonContained.propTypes = {
     disabled: PropTypes.bool,
     children: PropTypes.node,
 };
-
 function Authentication5(props) {
     const { data } = useAuthentication5();
 
