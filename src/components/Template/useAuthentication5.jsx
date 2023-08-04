@@ -1,5 +1,5 @@
 import React from 'react';
-import useAuthentication5ResponsiveSize from '../Authentication5/useAuthentication5ResponsiveSize.jsx';
+import useAuthentication5ResponsiveSize from './/useAuthentication5ResponsiveSize.jsx';
 
 
 const variantOptions = {
@@ -28,5 +28,6 @@ const useAuthentication5 = () => {
 
     return { data, fns };
 };
+
 
 export default useAuthentication5;

@@ -4,7 +4,11 @@ export default {
   theme: {
     colors: {
       primary:"#0F666D",
-      white:"#FFF"
+      white:"#FFF",
+      black:"#000",
+      "black-opacity-60":"#00000060"
+
+
     },
     extend: {
       // backgroundImage: {
