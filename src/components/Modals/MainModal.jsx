@@ -4,7 +4,7 @@ function MainModal(props) {
 
     return (
         <div className="fixed top-0 left-0 w-screen min-h-screen bg-black-opacity-60 z-10 flex justify-center items-center">
-            <div className="w-[998px] rounded-[12px] bg-white p-4 z-20 relative ">
+            <div className="w-[998px] rounded-[12px] shrink-0 bg-white p-4 z-20 relative ">
                 <div className="flex flex-col py-2">
                     <label>Username</label>
                     <input className="rounded-lg border p-2" type="text"/>
