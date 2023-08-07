@@ -8,7 +8,6 @@ export default {
       black:"#000",
       "black-opacity-60":"#00000060"
 
-
     },
     extend: {
       // backgroundImage: {
