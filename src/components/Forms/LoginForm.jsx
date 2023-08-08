@@ -1,7 +1,10 @@
 import React, {useState} from "react";
 import PrimaryButton from "../Buttons/PrimaryButton.jsx";
 import {useNavigate} from "react-router-dom";
+import {Snackbar, Alert} from "@mui/material";
 function LoginForm() {
+    const [isSnackBarOpen, setIsSnackBarOpen] = useState(false)
+    const [message, setMessage]= useState("")
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const API_URL_LOGIN =  "http://localhost:8080/api/signin"
@@ -21,17 +24,19 @@ function LoginForm() {
                 if(access.authenticated){
                     navigate("/customers")
                 }else{
-                    alert(access.message)
+                    setMessage(access.message)
+                    setIsSnackBarOpen(true)
                 }
             }else{
-                alert('Username and Password are required');
+                setMessage('Username and Password are required')
+                setIsSnackBarOpen(true)
             }
         }catch (error){
             console.error('error',error)
-            alert('error happened during login, please check username and password and try again')
+            setMessage('error happened during login, please check username and password and try again')
+            setIsSnackBarOpen(true)
         }
         }
-
     return (
         <>
             <div className="flex flex-col py-2">
@@ -43,6 +48,11 @@ function LoginForm() {
                 <input className="rounded-lg border p-2" type="password" value={password} onChange={(event) => setPassword(event.target.value)}/>
             </div>
             <PrimaryButton label="Sign in" onClick={handleSubmitSignin}  />
+            <Snackbar open={isSnackBarOpen} autoHideDuration={4000} >
+                <Alert severity="error">
+                    {message}
+                </Alert>
+            </Snackbar>
         </>
 )
 }
