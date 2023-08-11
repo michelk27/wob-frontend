@@ -8,7 +8,7 @@ const LoginPage = () => {
     const [isModelLoginOpen, setIsModelLoginOpen] = useState(false );
     return (
         <div className="bg-green_yellow_backgroung flex flex-row justify-start items-start w-1920 h-1024 p-0 box-border overflow-hidden">
-            <div className="absolute flex flex-col justify-start items-center p-0 box-border left-0 right-0 top-0 bottom-0 mx-auto" style={{ width: '601px', height: '620px', top: '190px' }}>
+            <div className="absolute flex flex-col justify-start items-center p-0 box-border left-0 right-0 top-0 bottom-0 mx-auto flex justify-center items-center w-601 h-620 top-190">
                 <img src={LogoImage} alt="logo" className="h-auto w-250.76 my-0" />
                 <div className="text-center whitespace-pre-wrap font-bold text-3xl text-green-600 font-inter mt-6">
                     Well-Organized Businesses
