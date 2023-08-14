@@ -1,7 +1,6 @@
 import React from 'react';
 import LogoImage from "../assets/logo.svg";
 import VisitRequestsList from "./Template/VisitRequestsList.jsx";
-import PrimaryButton from "./Buttons/PrimaryButton.jsx";
 import RequestButton from "./Buttons/RequestButton.jsx";
 
 const CustomerPage = () => {
