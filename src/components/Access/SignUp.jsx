@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import * as PropTypes from 'prop-types';
-import useAuthentication5 from "../Authentication5/useAuthentication5.jsx";
+import useAuthentication5 from "../Template/useAuthentication5.jsx";
 
 function ScreenDesktop(props) {
     return (
