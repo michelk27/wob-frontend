@@ -4,6 +4,7 @@ import ViewButton from "../Buttons/ViewButton.jsx";
 
 function VisitRequestsList() {
     const [visitRequests, setVisitRequests] = useState([]);
+    const [selectedRequest, setSelectedRequest] = useState(null);
     const [isModelDetailOpen, setIsModelDetailOpen] = useState(false );
 
 
@@ -25,6 +26,11 @@ function VisitRequestsList() {
         fetchVisitRequests().then(r =>{} ); // Call the async function here
     }, []);
 
+    const handleViewDetails = (request) => {
+        setSelectedRequest(request);
+        setIsModelDetailOpen(true);
+    };
+
     return (
         <>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg px-6">
@@ -44,7 +50,9 @@ function VisitRequestsList() {
                         <td scope="col" className="px-6 py-3">{request.date}</td>
                         <td scope="col" className="px-6 py-3">{request.type}</td>
                         <td scope="col" className="px-6 py-3">{request.status}</td>
-                        <td scope="col" className="px-6 py-3"><ViewButton label="view details" onClick={() => setIsModelDetailOpen(true)}/></td>
+                        <td scope="col" className="px-6 py-3">
+                            <ViewButton label="view details" onClick={() => handleViewDetails(request)} />
+                        </td>
                     </tr>
                 ))}
                 </tbody>
@@ -52,9 +60,10 @@ function VisitRequestsList() {
         </div>
             {isModelDetailOpen && (
                 <div className="fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-opacity-50 bg-black">
-                    {
-                        isModelDetailOpen &&  <DetailTemplate onClose={() => setIsModelDetailOpen(false)} />
-                    }
+                    <DetailTemplate
+                        onClose={() => setIsModelDetailOpen(false)}
+                        selectedRequest={selectedRequest}
+                    />
                 </div>
             )}
         </>
