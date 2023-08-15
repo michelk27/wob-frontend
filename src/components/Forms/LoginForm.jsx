@@ -44,12 +44,12 @@ function LoginForm() {
                 <img src={LogoImage} alt="logo" className="h-[74px] w-[250px] my-0" />
             </div>
             <div className="flex flex-col py-2">
-                <label>Username</label>
-                <input className="rounded-lg border p-2" type="text" value={username} onChange={(event) => setUsername(event.target.value)}/>
+                <label className="mb-4 font-semibold text-2xl">Username:</label>
+                <input className="rounded-lg border border-lightGray p-4" type="text" value={username} onChange={(event) => setUsername(event.target.value)}/>
             </div>
             <div className="flex flex-col py-2">
-                <label>Password</label>
-                <input className="rounded-lg border p-2" type="password" value={password} onChange={(event) => setPassword(event.target.value)}/>
+                <label className="mb-4 font-semibold text-2xl">Password:</label>
+                <input className="rounded-lg border border-lightGray p-4" type="password" value={password} onChange={(event) => setPassword(event.target.value)}/>
             </div>
             <div className="flex justify-center mt-4">
             <PrimaryButton label="Sign in" onClick={handleSubmitSignin}  />

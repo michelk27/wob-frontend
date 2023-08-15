@@ -8,6 +8,7 @@ export default {
       black: "#000",
        lightGreen:"#D7F4E3",
        yellow:"#FEF0CD",
+      lightGray:"#C8CED4",
       "black-opacity-60": "#00000060"
 
     },
