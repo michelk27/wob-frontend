@@ -9,7 +9,7 @@ function RequestButton() {
         navigate("/newvisit");
     };
     return (
-        <button className="bg-primary rounded-md px-6 py-2 text-white mt-4" onClick={handleButtonClick}>
+        <button className="bg-primary rounded-md px-6 py-2 text-white" onClick={handleButtonClick}>
             <img src={IconImage} alt="Icon" className="inline-block mr-2" />
             Request a Service
         </button>

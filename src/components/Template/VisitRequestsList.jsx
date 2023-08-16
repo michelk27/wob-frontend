@@ -6,6 +6,7 @@ import TypeImage from '../../assets/images/Type.svg';
 import StatusImage from '../../assets/images/Status.svg';
 import DetailImage from '../../assets/images/Detail.svg';
 import StatusPill from "../Buttons/StatusPill.jsx";
+import RequestButton from "../Buttons/RequestButton.jsx";
 
 
 function VisitRequestsList() {
@@ -39,24 +40,28 @@ function VisitRequestsList() {
 
     return (
         <>
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg px-6">
-            <h1 className=" text-[#0F666D] font-bold ">My Service Requests</h1>
-            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 border p-8">
+        <div className="relative overflow-x-auto sm:rounded-lg px-6">
+            <div className="flex item-center justify-between gap-4 w-full mb-6">
+                <h1 className=" text-[#0F666D] font-bold text-2xl">My Service Requests</h1>
+                <RequestButton/>
+            </div>
+            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 border-[1px] border-lightGray">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr className="border-b">
-                    <th className="p-3 text-sm font-semibold tracking-wide text-left">
+                <tr className="text-center border-b-[1px] border-lightGray">
+                    <th />
+                    <th className="p-3 text-sm font-semibold tracking-wide">
                         <img src={VisitDateImage} alt="Visit Date" className="inline-block mr-2" />
                         Visit Date
                     </th>
-                    <th className="p-3 text-sm font-semibold tracking-wide text-left">
+                    <th className="p-3 text-sm font-semibold tracking-wide">
                         <img src={TypeImage} alt="Type" className="inline-block mr-2" />
                         Type
                     </th>
-                    <th className="p-3 text-sm font-semibold tracking-wide text-left">
+                    <th className="p-3 text-sm font-semibold tracking-wide">
                         <img src={StatusImage} alt="Status" className="inline-block mr-2" />
                         Status
                     </th>
-                    <th className="p-3 text-sm font-semibold tracking-wide text-left">
+                    <th className="p-3 text-sm font-semibold tracking-wide">
                         <img src={DetailImage} alt="Detail" className="inline-block mr-2" />
                         Details
                     </th>
@@ -64,7 +69,10 @@ function VisitRequestsList() {
                 </thead>
                 <tbody>
                 {visitRequests.map((request) => (
-                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={request.id}>
+                    <tr className="bg-white dark:bg-gray-800 dark:border-gray-700 text-center border-b-[0.5px] border-lightGray" key={request.id}>
+                        <td className="pl-2">
+                            <div className="w-2 h-[43px] bg-lightGray rounded-lg"/>
+                        </td>
                         <td scope="col" className="px-6 py-3">{request.date}</td>
                         <td scope="col" className="px-6 py-3">{request.type}</td>
                         <td scope="col" className="px-6 py-3">

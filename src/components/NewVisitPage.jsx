@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import LogoImage from "../assets/logo.svg";
 import {Alert, Snackbar} from "@mui/material";
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const NewVisitPage = () => {
     const [companyName, setCompanyName] = useState("");
@@ -8,12 +9,20 @@ const NewVisitPage = () => {
     const [date, setDate] = useState("");
     const [type, setType] = useState("");
     const API_URL_REQUEST =  "http://localhost:8080/api/visit-requests"
+    const navigate = useNavigate();
+
 
     const [isSnackBarOpen, setIsSnackBarOpen] = useState(false); // State for Snackbar
     const [message, setMessage] = useState(""); // State for Snackbar message
 
     const handleRequestVisit = async () => {
-        const initialStatus = "Pending"; //  initial status
+        const initialStatus = "Pending";
+
+        if (!companyName || !addresses || !date || !type) {
+            setMessage("Please fill in all fields");
+            setIsSnackBarOpen(true);
+            return;
+        }
         try {
             const response = await fetch(API_URL_REQUEST, {
                 method: 'POST',
@@ -28,14 +37,12 @@ const NewVisitPage = () => {
                     status: initialStatus,
                 }),
             });
-
             if (response.ok) {
-                // Request successful, you can handle it here
                 console.log('Visit requested successfully');
                 setMessage("Visit requested successfully");
                 setIsSnackBarOpen(true);
+                navigate('/customers');
             } else {
-                // Request failed, you can handle the error here
                 console.error('Failed to request visit');
                 setMessage("Failed to request visit");
                 setIsSnackBarOpen(true);
@@ -46,45 +53,44 @@ const NewVisitPage = () => {
             setIsSnackBarOpen(true);
         }
     };
-
     return (
         <div>
-            <div className="w-screen h-[91px] shadow-md bg-white flex justify-center items-center ">
+            <div className="w-screen h-[91px] shadow-md bg-white flex justify-center items-center mb-6">
                 <img src={LogoImage} alt="logo" className="h-[74px] w-[250px] my-0" />
             </div>
             <h1 className="text-[#0F666D] text-2xl font-bold px-8">Request a Service:</h1>
             <div className="p-8">
                 <div className="flex flex-col py-2">
-                    <label>Company name:</label>
+                    <label className="mb-4 font-semibold">Company name:</label>
                     <input
-                        className="rounded-lg border p-2"
+                        className="rounded-lg border p-2 border-lightGray"
                         type="text"
                         value={companyName}
                         onChange={(e) => setCompanyName(e.target.value)}
                     />
                 </div>
                 <div className="flex flex-col py-2">
-                    <label>Type the company address:</label>
+                    <label className="mb-4 font-semibold">Type the company address:</label>
                     <input
-                        className="rounded-lg border p-2"
+                        className="rounded-lg border p-2 border-lightGray"
                         type="text"
                         value={addresses}
                         onChange={(e) => setAddresses(e.target.value)}
                     />
                 </div>
                 <div className="flex flex-col py-2">
-                    <label>Choose a date:</label>
+                    <label className="mb-4 font-semibold">Choose a date:</label>
                     <input
-                        className="rounded-lg border p-2"
+                        className="rounded-lg border p-2 border-lightGray"
                         type="date"
                         value={date}
                         onChange={(e) => setDate(e.target.value)}
                     />
                 </div>
                 <div className="flex flex-col py-2">
-                    <label>Type:</label>
+                    <label className="mb-4 font-semibold">Type:</label>
                     <input
-                        className="rounded-lg border p-2"
+                        className="rounded-lg border p-2 border-lightGray"
                         type="text"
                         value={type}
                         onChange={(event) => {
@@ -94,7 +100,7 @@ const NewVisitPage = () => {
                 </div>
                 <div className="flex justify-center mt-4">
                     <button
-                        className="bg-primary rounded-md px-6 py-2 text-white mt-4"
+                        className="bg-primary rounded-md px-[76px] py-2 text-white mt-4"
                         onClick={handleRequestVisit}
                     >
                         Request a Visit

@@ -11,8 +11,9 @@ function DetailTemplate(props) {
     return (
         <MainModal onClose={props.onClose}>
             {selectedRequest && (
-                <div>
-                    <h2 className="flex flex-col items-center justify-center h-full text-[#0F666D] text-2xl-normal font-bold">Request Details</h2>
+                <>
+                    <h2 className="flex flex-col items-center justify-center h-full text-[#0F666D] text-2xl font-bold mb-6">Request Details</h2>
+                    <div className="flex flex-col justify-center items-start gap-4">
                     <p>
                         <img src={VisitDateImage} alt="Visit Date" className="inline-block mr-2" />
                         Visit Date: {selectedRequest.date}
@@ -34,6 +35,7 @@ function DetailTemplate(props) {
                         Address: {selectedRequest.addresses}
                     </p>
                 </div>
+                </>
             )}
         </MainModal>
     )

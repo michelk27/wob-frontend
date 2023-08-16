@@ -10,9 +10,9 @@ const StatusPill = ({ status }) => {
     }
 
     return (
-        <span className={`px-2 py-1 rounded-full ${pillClass}`}>
+        <div className={`px-4 py-1 rounded-full max-w-[230px] w-full text-center mx-auto ${pillClass}`}>
             {status}
-        </span>
+        </div>
     );
 };
 
